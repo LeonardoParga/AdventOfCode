@@ -6,6 +6,6 @@ namespace AdventOfCode
 {
     public interface IChallenge
     {
-        string Run();
+        IEnumerable<string> Run();
     }
 }

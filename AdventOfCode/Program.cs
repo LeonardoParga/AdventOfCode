@@ -17,7 +17,10 @@ namespace AdventOfCode
                 {
                     Console.WriteLine($"Running {type.Namespace} {type.Name}");
                     var challenge = Activator.CreateInstance(type);
-                    (challenge as IChallenge).Run();
+                    foreach (var result in (challenge as IChallenge).Run())
+                    {
+                        Console.WriteLine($"{type.Name} - {result}");
+                    }
                 }
             }
 

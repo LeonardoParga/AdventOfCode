@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="2015\Inputs\" />
+    <None Remove="2015\Inputs\Day1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="2015\Inputs\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -7,13 +7,15 @@ namespace AdventOfCode._2015
 {
     public class Day1 : IChallenge
     {
-        public string Run()
+        public IEnumerable<string> Run()
         {
-            var input = FileHandler.OpenFile(nameof(Day1));
+            var input = FileHandler.OpenFile(nameof(Day1), 2015);
 
             var lastFloor = GetFloor(input[0]);
 
-            return lastFloor.ToString();
+            yield return $"Part 1 - {lastFloor.ToString()}";
+
+            yield return $"Part 2 - {lastFloor.ToString()}";
         }
 
         private int GetFloor(string input)
