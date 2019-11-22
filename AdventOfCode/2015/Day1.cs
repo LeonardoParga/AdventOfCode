@@ -5,27 +5,32 @@ using System.Text;
 
 namespace AdventOfCode._2015
 {
-    public class Day1 : IChallenge
+    public class Day1 : Day, IChallenge
     {
         public IEnumerable<string> Run()
         {
-            var input = FileHandler.OpenFile(nameof(Day1), 2015);
-
-            var lastFloor = GetFloor(input[0]);
-
-            yield return $"Part 1 - {lastFloor.ToString()}";
-
-            yield return $"Part 2 - {lastFloor.ToString()}";
+            return GetFloor(Input[0]);
         }
 
-        private int GetFloor(string input)
+        private IEnumerable<string> GetFloor(string input)
         {
-            var valor = 0;
+            var value = 0;
+            var part2Solved = false;
+            var i = 0;
+
             foreach (var currentChar in input)
             {
-                valor += currentChar == '(' ? 1 : -1;
+                i++;
+
+                value += currentChar == '(' ? 1 : -1;
+
+                if (!part2Solved && value == -1)
+                {
+                    part2Solved = true;
+                    yield return $"Part 2 - {i}";
+                }
             }
-            return valor;
+            yield return $"Part 1 - {value}";
         }
     }
 }
