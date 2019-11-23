@@ -10,19 +10,32 @@ namespace AdventOfCode._2015
         public IEnumerable<string> Run()
         {
             long total = 0;
+            long totalRibbon = 0;
             foreach (var box in Input)
             {
-                total += GetTotalLength(box);
+                var values = box.Split("x").Select(x => long.Parse(x)).ToList();
+                values.Sort();
+                var permutations = GetAllPermutations(values); // ordered ascending
+
+                total += GetTotalLength(permutations);
+                totalRibbon += GetTotalLengthRibbon(values);
             }
             yield return ($"Step 1 - {total}");
+            yield return ($"Step 2 - {totalRibbon}");
         }
 
-        private long GetTotalLength(string box)
+        private long GetTotalLength(List<long> permutations)
         {
-            var values = box.Split("x").Select(x => long.Parse(x)).ToList();
-            var permutations = GetAllPermutations(values);
+            return permutations.Select(x => x * 2L).Sum() + permutations.First();
+        }
 
-            return permutations.Select(x => x * 2L).Sum() + GetSmallestSide(permutations);
+        private long GetTotalLengthRibbon(List<long> values)
+        {
+            var total = 1L;
+            foreach (var item in values)
+                total *= item;
+            total += (values[0] * 2) + (values[1] * 2);
+            return total;
         }
 
         private List<long> GetAllPermutations(List<long> values)
@@ -38,15 +51,16 @@ namespace AdventOfCode._2015
                     j++;
                 }
             }
+            permutations.Sort();
             return permutations;
         }
 
-        private long GetSmallestSide(List<long> permutations)
-        {
-            var min = permutations.First();
-            foreach (var perm in permutations)
-                min = Math.Min(min, perm);
-            return min;
-        }
+        //private long GetSmallestSide(List<long> permutations)
+        //{
+        //    var min = permutations.First();
+        //    foreach (var perm in permutations)
+        //        min = Math.Min(min, perm);
+        //    return min;
+        //}
     }
 }
