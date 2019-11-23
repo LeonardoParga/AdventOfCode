@@ -8,7 +8,7 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            var challengeType = typeof(IChallenge);
+            var challengeType = typeof(IChallenge); // Change this to the challenge you want to run
             var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => challengeType.IsAssignableFrom(p));
 
             foreach (var type in types)
