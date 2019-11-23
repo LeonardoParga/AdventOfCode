@@ -9,12 +9,14 @@ namespace AdventOfCode._2015
     {
         public IEnumerable<string> Run()
         {
-            yield return $"Step 1 - {Simulate(new List<Santa>() { new Santa() })}";
-            yield return $"Step 2 - {Simulate(new List<Santa>() { new Santa(), new Santa() })}";
+            yield return ResultString(1, Simulate(numOfSantas: 1));
+            yield return ResultString(2, Simulate(numOfSantas: 2));
         }
 
-        private string Simulate(List<Santa> santas)
+        private string Simulate(int numOfSantas)
         {
+            var santas = CreateSantas(numOfSantas);
+
             Santa currentSanta = santas.First();
 
             var grid = new SortedDictionary<string, int>(); // id, count
@@ -38,6 +40,16 @@ namespace AdventOfCode._2015
             }
 
             return grid.Count().ToString();
+        }
+
+        private List<Santa> CreateSantas(int num)
+        {
+            if (num <= 0) return null;
+
+            var santas = new List<Santa>();
+            for (int i = 0; i < num; i++)
+                santas.Add(new Santa());
+            return santas;
         }
     }
 

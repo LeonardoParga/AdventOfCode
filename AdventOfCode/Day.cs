@@ -16,5 +16,7 @@ namespace AdventOfCode
 
             this.Input = FileHandler.OpenFile(this.GetType().Name, year);
         }
+
+        protected string ResultString(int step, object result) => $"Step {step} - {result}";
     }
 }

@@ -19,7 +19,7 @@ namespace AdventOfCode
                     var challenge = Activator.CreateInstance(type);
                     foreach (var result in (challenge as IChallenge).Run())
                     {
-                        Console.WriteLine($"{type.Name} - {result}");
+                        Console.WriteLine($"{type.Name}: {result}");
                     }
                 }
             }
