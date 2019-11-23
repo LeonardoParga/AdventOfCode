@@ -36,7 +36,6 @@ namespace AdventOfCode._2015
                     var curIndex = santas.IndexOf(currentSanta);
                     currentSanta = santas.ElementAt((curIndex + 1) == santas.Count ? 0 : curIndex + 1);
                 }
-
             }
 
             return grid.Count().ToString();

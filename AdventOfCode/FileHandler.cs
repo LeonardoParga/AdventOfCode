@@ -8,7 +8,7 @@ namespace AdventOfCode
 {
     public static class FileHandler
     {
-        public static string[] OpenFile(string fileName, int year)
+        public static string[] ReadFile(string fileName, int year)
         {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $@"{year}\Inputs\{fileName}.txt");
             return File.ReadAllLines(path);

@@ -14,7 +14,7 @@ namespace AdventOfCode
             var split = this.GetType().Namespace.Split("_");
             var year = int.Parse(split.Last());
 
-            this.Input = FileHandler.OpenFile(this.GetType().Name, year);
+            this.Input = FileHandler.ReadFile(this.GetType().Name, year);
         }
 
         protected string ResultString(int step, object result) => $"Step {step} - {result}";
