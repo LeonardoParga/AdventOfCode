@@ -20,8 +20,8 @@ namespace AdventOfCode._2015
                 total += GetTotalLength(permutations);
                 totalRibbon += GetTotalLengthRibbon(values);
             }
-            yield return ResultString(1, total);
-            yield return ResultString(2, totalRibbon);
+            yield return ResultString(total);
+            yield return ResultString(totalRibbon);
         }
 
         private long GetTotalLength(List<long> permutations)

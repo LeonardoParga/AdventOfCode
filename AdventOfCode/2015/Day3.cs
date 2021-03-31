@@ -9,8 +9,8 @@ namespace AdventOfCode._2015
     {
         public IEnumerable<string> Run()
         {
-            yield return ResultString(1, Simulate(numOfSantas: 1));
-            yield return ResultString(2, Simulate(numOfSantas: 2));
+            yield return ResultString(Simulate(numOfSantas: 1));
+            yield return ResultString(Simulate(numOfSantas: 2));
         }
 
         private string Simulate(int numOfSantas)

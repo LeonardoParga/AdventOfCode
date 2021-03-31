@@ -10,8 +10,8 @@ namespace AdventOfCode._2015
     {
         public IEnumerable<string> Run()
         {
-            yield return ResultString(1, GetNumber(Input[0]));
-            yield return ResultString(2, GetNumber(Input[0], true));
+            yield return ResultString(GetNumber(Input[0]));
+            yield return ResultString(GetNumber(Input[0], true));
         }
 
         private int GetNumber(string input, bool getSix = false)

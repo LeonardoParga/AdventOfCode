@@ -8,6 +8,7 @@ namespace AdventOfCode
     public abstract class Day
     {
         protected string[] Input { get; set; }
+        protected int CurrentStep { get; set; }
 
         public Day()
         {
@@ -17,6 +18,10 @@ namespace AdventOfCode
             this.Input = FileHandler.ReadFile(this.GetType().Name, year);
         }
 
-        protected string ResultString(int step, object result) => $"Step {step} - {result}";
+        protected string ResultString(object result)
+        {
+            CurrentStep++;
+            return $"Step {CurrentStep} - {result}";
+        }
     }
 }

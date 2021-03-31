@@ -10,10 +10,10 @@ namespace AdventOfCode._2019
         public IEnumerable<string> Run()
         {
             var sum = Input.Select(x => GetFuelRequired(x)).Sum();
-            yield return ResultString(1, sum);
+            yield return ResultString(sum);
 
             var sum2 = Input.Select(x => GetTotalFuel(long.Parse(x))).Sum();
-            yield return ResultString(2, sum2);
+            yield return ResultString(sum2);
         }
 
         public long GetTotalFuel(long mass)

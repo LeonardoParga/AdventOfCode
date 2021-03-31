@@ -17,10 +17,10 @@ namespace AdventOfCode._2015
         public IEnumerable<string> Run()
         {
             var niceStrings1 = Input.Where(x => IsNicePart1(x)).ToList();
-            yield return ResultString(1, niceStrings1.Count);
+            yield return ResultString(niceStrings1.Count);
 
             var niceStrings2 = Input.Where(x => IsNicePart2(x)).ToList();
-            yield return ResultString(2, niceStrings2.Count);
+            yield return ResultString(niceStrings2.Count);
         }
 
         private bool IsNicePart1(string str)

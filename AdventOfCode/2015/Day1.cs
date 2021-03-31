@@ -27,10 +27,10 @@ namespace AdventOfCode._2015
                 if (!part2Solved && value == -1)
                 {
                     part2Solved = true;
-                    yield return ResultString(2, i);
+                    yield return ResultString(i);
                 }
             }
-            yield return ResultString(1, value);
+            yield return ResultString(value);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace AdventOfCode._2015
 
         public IEnumerable<string> Run()
         {
-            yield return ResultString(1, Step1());
-            yield return ResultString(2, Step2());
+            yield return ResultString(Step1());
+            yield return ResultString(Step2());
         }
 
         private int Step1()
