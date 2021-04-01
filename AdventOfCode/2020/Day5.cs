@@ -72,18 +72,16 @@ namespace AdventOfCode._2020
 
             public BoardingPass(int row, int column)
             {
-                _row = row;
-                _column = column;
+                Row = row;
+                Column = column;
             }
 
             public Partition RowPartition { get; set; }
             public Partition ColumnPartition { get; set; }
 
-            private int _row;
-            public int Row { get { return _row; } }
+            public int Row { get; private set; }
+            public int Column { get; private set; }
 
-            private int _column;
-            public int Column { get { return _column; } }
             public int SeatId { get { return Row * 8 + Column; } }
 
             private void SetRowAndColumn(string input)
@@ -109,8 +107,8 @@ namespace AdventOfCode._2020
                     }
                 }
 
-                _row = RowPartition.FinalValue;
-                _column = ColumnPartition.FinalValue;
+                Row = RowPartition.FinalValue;
+                Column = ColumnPartition.FinalValue;
             }
         }
 
@@ -127,7 +125,7 @@ namespace AdventOfCode._2020
 
             public void KeepUpperHalf()
             {
-                if (Math.Abs(MinNumber - MaxNumber) == 1)
+                if (MaxNumber - MinNumber == 1)
                     FinalValue = MaxNumber;
 
                 var addAmount = (int)Math.Ceiling((MaxNumber - MinNumber) / 2d);
@@ -136,7 +134,7 @@ namespace AdventOfCode._2020
 
             public void KeepLowerHalf()
             {
-                if (Math.Abs(MinNumber - MaxNumber) == 1)
+                if (MaxNumber - MinNumber == 1)
                     FinalValue = MinNumber;
 
                 var subtractAmount = (int)Math.Ceiling((MaxNumber - MinNumber) / 2d);
