@@ -13,5 +13,11 @@ namespace AdventOfCode
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $@"{year}\Inputs\{fileName}.txt");
             return File.ReadAllLines(path);
         }
+
+        public static string ReadFileText(string fileName, int year)
+        {
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $@"{year}\Inputs\{fileName}.txt");
+            return File.ReadAllText(path);
+        }
     }
 }

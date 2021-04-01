@@ -9,6 +9,7 @@ namespace AdventOfCode
     {
         protected string[] Input { get; set; }
         protected int CurrentStep { get; set; }
+        protected string RawInput { get; set; }
 
         public Day()
         {
@@ -16,6 +17,7 @@ namespace AdventOfCode
             var year = int.Parse(split.Last());
 
             this.Input = FileHandler.ReadFile(this.GetType().Name, year);
+            this.RawInput = FileHandler.ReadFileText(this.GetType().Name, year);
         }
 
         protected string ResultString(object result)

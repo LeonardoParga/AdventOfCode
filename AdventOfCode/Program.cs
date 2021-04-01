@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
-using AdventOfCode._2015;
-using AdventOfCode._2019;
 
 namespace AdventOfCode
 {
@@ -10,7 +7,7 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            var challengeType = typeof(_2020.Day3); // Change this to the challenge you wish to run
+            var challengeType = typeof(_2020.Day4); // Change this to the challenge you wish to run
             var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => challengeType.IsAssignableFrom(p));
 
             foreach (var type in types)
