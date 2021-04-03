@@ -62,11 +62,7 @@ namespace AdventOfCode._2020
                 innerBagBag = newBag;
             }
 
-            var innerBag = new InnerBag();
-            innerBag.Bag = innerBagBag;
-            innerBag.Count = innerBagCount;
-
-            return innerBag;
+            return new InnerBag(innerBagBag, innerBagCount);
         }
 
         private class Bag
@@ -100,8 +96,14 @@ namespace AdventOfCode._2020
 
         private class InnerBag
         {
+            public InnerBag(Bag bag, int count)
+            {
+                Bag = bag;
+                Count = count;
+            }
+
             public Bag Bag { get; set; }
-            public int Count { get; set; }
+            private int Count { get; set; }
 
             public int DeepCount()
             {
