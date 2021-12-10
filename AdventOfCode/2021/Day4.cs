@@ -10,6 +10,33 @@ namespace AdventOfCode._2021
         public IEnumerable<string> Run()
         {
             var drawnNumbers = Input[0].Split(",").Select(x => int.Parse(x)).ToList();
+            var boards = CreateBoards();
+
+            var remainingBoards = boards.Count;
+            foreach (var num in drawnNumbers)
+            {
+                if (remainingBoards == 0)
+                    break;
+
+                foreach (var board in boards)
+                {
+                    if (board.AlreadyWon)
+                        continue;
+
+                    if (board.Wins(num))
+                    {
+                        // print the results of the first and last boards to win
+                        if (remainingBoards == boards.Count || remainingBoards == 1)
+                            yield return ResultString(board.SumOfUnmarked * num);
+
+                        remainingBoards--;
+                    }
+                }
+            }
+        }
+
+        private List<Board> CreateBoards()
+        {
             var boards = new List<Board>();
             var boardStr = string.Empty;
 
@@ -23,23 +50,10 @@ namespace AdventOfCode._2021
                 else
                     boardStr += Input[i] + " ";
             }
+            if (!string.IsNullOrWhiteSpace(boardStr))
+                boards.Add(new Board(boardStr));
 
-            var running = true;
-            foreach (var num in drawnNumbers)
-            {
-                if (!running)
-                    break;
-
-                foreach (var board in boards)
-                {
-                    if (board.Wins(num))
-                    {
-                        yield return ResultString(board.SumOfUnmarked * num);
-                        running = false;
-                        break;
-                    }
-                }
-            }
+            return boards;
         }
 
         class Board
@@ -57,6 +71,8 @@ namespace AdventOfCode._2021
 
             private List<Cell> Cells { get; set; }
 
+            public bool AlreadyWon { get; set; }
+
             public int SumOfUnmarked => Cells.Where(x => !x.Marked).Sum(x => x.Value);
 
             public bool Wins(int value)
@@ -65,39 +81,45 @@ namespace AdventOfCode._2021
                 if (cell != null)
                     cell.Marked = true;
 
-                for (int i = 0; i <= Cells.Count - SequenceSize; i += SequenceSize)
+                return CheckRowsAndColumns();
+            }
+
+            private bool CheckRowsAndColumns()
+            {
+                for (int i = 0; i < Cells.Count; i++)
                 {
-                    var allMarked = true;
-                    for (int j = i; j < i + SequenceSize; j++)
+                    // if the index is not on the first layer (top or left), it will already have been checked
+                    // columns start in the top layer, where i < SequenceSize, rows start on the left, where numbers are evenly divisible by SequenceSize
+                    // 0, 1, 2, 3, 4, 5, 10, 15, 20
+                    if (i < SequenceSize || i % SequenceSize == 0)
                     {
-                        if (!Cells[j].Marked)
-                        {
-                            allMarked = false;
-                            break;
-                        }
+                        var isRow = i % SequenceSize == 0;
+                        var allInSequenceMarked = AllInSequenceMarked(isRow, i);
+
+                        // index 0 needs to be checked twice, once as a row, once as a column
+                        if (i == 0 && !allInSequenceMarked)
+                            allInSequenceMarked = AllInSequenceMarked(isRow: false, i); // forcing isRow to false to check it as a column
+
+                        if (allInSequenceMarked)
+                            return true;
                     }
-
-                    if (allMarked)
-                        return true;
-                }
-
-                for (int i = 0; i < SequenceSize; i++)
-                {
-                    var allMarked = true;
-                    for (int j = i; j < SequenceSize * (SequenceSize - 1); j++)
-                    {
-                        if (!Cells[j].Marked)
-                        {
-                            allMarked = false;
-                            break;
-                        }
-                    }
-
-                    if (allMarked)
-                        return true;
                 }
 
                 return false;
+            }
+
+            private bool AllInSequenceMarked(bool isRow, int currentIndex)
+            {
+                var lastIndex = isRow ? currentIndex + SequenceSize : Cells.Count;
+
+                while (currentIndex < lastIndex)
+                {
+                    if (!Cells[currentIndex].Marked)
+                        return false;
+                    currentIndex += isRow ? 1 : SequenceSize; // if it's a column, add the sequence size to go down
+                }
+                AlreadyWon = true;
+                return true;
             }
 
             private class Cell

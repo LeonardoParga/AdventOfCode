@@ -20,12 +20,14 @@ namespace AdventOfCode._2021
 
             foreach (var line in Input)
             {
+                var num = int.Parse(line.Substring(line.IndexOf(" ")));
+
                 if (line.StartsWith("forward"))
-                    horizontalPos += int.Parse(line.Substring(line.IndexOf(" ")));
+                    horizontalPos += num;
                 else if (line.StartsWith("down"))
-                    depth += int.Parse(line.Substring(line.IndexOf(" ")));
+                    depth += num;
                 else if (line.StartsWith("up"))
-                    depth -= int.Parse(line.Substring(line.IndexOf(" ")));
+                    depth -= num;
             }
 
             return depth * horizontalPos;
@@ -39,16 +41,17 @@ namespace AdventOfCode._2021
 
             foreach (var line in Input)
             {
+                var num = int.Parse(line.Substring(line.IndexOf(" ")));
+
                 if (line.StartsWith("forward"))
                 {
-                    var number = int.Parse(line.Substring(line.IndexOf(" ")));
-                    horizontalPos += number;
-                    depth += aim * number;
+                    horizontalPos += num;
+                    depth += aim * num;
                 }
                 else if (line.StartsWith("down"))
-                    aim += int.Parse(line.Substring(line.IndexOf(" ")));
+                    aim += num;
                 else if (line.StartsWith("up"))
-                    aim -= int.Parse(line.Substring(line.IndexOf(" ")));
+                    aim -= num;
             }
 
             return depth * horizontalPos;
