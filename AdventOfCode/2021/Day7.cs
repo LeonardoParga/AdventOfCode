@@ -29,8 +29,7 @@ namespace AdventOfCode._2021
 
             // n == number of steps to midpoint == Math.Abs(mean - x)
             // formula to find fuel necessary is: n + ((n-1) * n)/2 // https://math.stackexchange.com/questions/593318/factorial-but-with-addition/593323
-            // checking if number of steps is 1 to avoid dividing by zero
-            var calculateFuelUsage = (int mean, int x) => Math.Abs(mean - x) == 1 ? 1 : Math.Abs(mean - x) + ((Math.Abs(mean - x) - 1) * Math.Abs(mean - x)) / 2;
+            var calculateFuelUsage = (int mean, int x) => Math.Abs(mean - x) + ((Math.Abs(mean - x) - 1) * Math.Abs(mean - x)) / 2;
 
             var mean = (int)Math.Floor(meanDouble);
             var firstFuelCount = values.Select(x => calculateFuelUsage(mean, x)).Sum();
