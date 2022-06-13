@@ -7,20 +7,15 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            var challengeType = typeof(_2021.Day4); // Change this to the challenge you wish to run
-            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => challengeType.IsAssignableFrom(p));
+            var challengeType = typeof(_2021.Day8); // Change this to the challenge you wish to run
+            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(x => challengeType.IsAssignableFrom(x));
 
             foreach (var type in types)
             {
-                if (type.IsClass)
-                {
-                    Console.WriteLine($"Running {type.Namespace} {type.Name}");
-                    var challenge = Activator.CreateInstance(type);
-                    foreach (var result in (challenge as IChallenge).Run())
-                    {
-                        Console.WriteLine($"{type.Name}: {result}");
-                    }
-                }
+                Console.WriteLine($"Running {type.Namespace} {type.Name}");
+                var challenge = Activator.CreateInstance(type);
+                foreach (var result in (challenge as IChallenge).Run())
+                    Console.WriteLine($"{type.Name}: {result}");
             }
 
             Console.ReadLine();
